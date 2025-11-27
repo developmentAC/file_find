@@ -10,7 +10,7 @@ Oliver Bonham-Carter
 
 Email: obonhamcarter at allegheny.edu
 
-A fast, colorized command-line tool written in Rust for recursively searching files in a directory tree by filename (using regular expressions) and optionally searching within those files for lines matching a second regular expression. Results are colour-highlighted for easy reading.
+A fast, colourized command-line tool written in Rust for recursively searching files in a directory tree by filename (using regular expressions) and optionally searching within those files for lines matching a second regular expression. Results are colour-highlighted for easy reading.
 
 File-find, was designed for working primarily with web development projects, but can be used for any type of project.
 
@@ -18,7 +18,7 @@ File-find, was designed for working primarily with web development projects, but
 
 - Recursively searches directories for files matching a filename regex
 - Optionally searches inside matching files for lines matching a content regex
-- Colorized output for file paths and matching lines
+- colourized output for file paths and matching lines
 - Displays search duration
 - Helpful usage and extended help messages
 
@@ -131,7 +131,7 @@ cargo run -- --bighelp
 
 - The filename pattern is a regular expression (Rust regex syntax).
 - The `--search` option is also a regular expression for matching lines inside files.
-- Output is colorized for clarity.
+- Output is colourized for clarity.
 - If a file cannot be read, a warning is shown.
 
 ---
