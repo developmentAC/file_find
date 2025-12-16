@@ -80,8 +80,6 @@ fn colour_print(text: &str, colour: &str) {
 } // end of colour_print()
 
 fn main() {
-    // Print a welcome message
-    show_banner();
 
     // Display version information from Cargo.toml
     toml_extract::main();
@@ -91,6 +89,9 @@ fn main() {
 
     // Show usage if not enough arguments are provided
     if args.len() < 2 {
+        // Print a welcome message
+        show_banner();
+
         println!(
             "Usage: {} <filename_regex> [--help] [--search <string_regex>]",
             args[0]
