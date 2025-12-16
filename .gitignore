@@ -6,6 +6,7 @@
 # Rust project #
 ################
 target/
+testData/
 
 # bash #
 ########

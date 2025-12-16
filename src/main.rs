@@ -211,29 +211,33 @@ fn recurse_files(paths: fs::ReadDir, filename_regex: &Regex, search_regex: Optio
         // If path is a file, check if filename matches regex
         } else if let Some(file_name) = path.file_name().and_then(|f| f.to_str()) {
             if filename_regex.is_match(file_name) {
-                // Print the file path in yellow
-                // moving this code below to print only when the search succeeds
-                // let msg = format!("  {}", path.display());
-                // colour_print(&msg, "yellow");
-
                 // Try to read file contents
                 let contents = fs::read_to_string(&path)
                     .unwrap_or_else(|_| "  Unable to read file contents".to_string());
+                
                 // If a search regex is provided, print matching lines
                 if let Some(search) = search_regex {
+                    let mut file_printed = false;
                     for (i, line) in contents.lines().enumerate() {
                         if search.is_match(line) {
-                // Print the file path in yellow
-                let msg = format!("  {}", path.display());
-                colour_print(&msg, "green");
-
+                            // Print the file path only once when first match is found
+                            if !file_printed {
+                                let msg = format!("  {}", path.display());
+                                colour_print(&msg, "green");
+                                file_printed = true;
+                            }
                             println!("    Line {}: {}", i + 1, line.cyan().bold());
                         }
                     }
+                    if file_printed {
+                        found = true;
+                    }
                 } else {
-                    // println!("Contents:\n{}", contents);
+                    // No search regex provided, just print the file path
+                    let msg = format!("  {}", path.display());
+                    colour_print(&msg, "green");
+                    found = true;
                 }
-                found = true;
             }
         }
     }
