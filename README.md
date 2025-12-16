@@ -119,13 +119,27 @@ Show usage and regex tips:
 cargo run -- --bighelp
 ```
 
-## Example Output
+## Simple Example
+
+In the following command, we search for all Rust source files (`.rs`) in the current directory and its subdirectories that contain the word `expect`:
+
+```sh 
+cargo run -- ".rs" --search expect
+```
+
+The output will look like this:
 
 ```text
   ./src/main.rs
-    Line 42: fn main() {
-  Search completed in 0.01s
+    Line 116:     let filename_regex = Regex::new(&args[1]).expect("Invalid filename regex");
+    Line 120:             .map(|s| Regex::new(s).expect("Invalid search regex"))
+  ./src/toml_extract.rs
+    Line 26:     let content = fs::read_to_string(file_path).expect("Failed to read Cargo.toml file");
+    Line 29:     let cargo_toml: CargoToml = from_str(&content).expect("Failed to parse Cargo.toml");
+  Search completed in 36.25ms
 ```
+
+Cool, right?!
 
 ## Notes
 
