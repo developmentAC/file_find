@@ -10,9 +10,6 @@ use std::time::Instant;
 mod toml_extract; // extract and print the version information according to the toml file
 
 fn show_banner() {
-    // banner ref: https://manytools.org/hacker-tools/ascii-banner/
-
-    //logo design: "ticks", use "█" to replace "/\" chars, "_" replaced with space
     let banner = String::from(
         "
 
