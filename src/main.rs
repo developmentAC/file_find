@@ -77,10 +77,9 @@ fn colour_print(text: &str, colour: &str) {
             println!("{}", text.bright_yellow().bold());
         }
     }
-} // end of colour_print()
+}
 
 fn main() {
-
     // Display version information from Cargo.toml
     toml_extract::main();
 
@@ -113,58 +112,6 @@ fn main() {
     // Show extended help if --bighelp is present
     if args.contains(&"--bighelp".to_string()) {
         bighelp();
-        // println!("  Usages without regex:");
-        // let msg = format!(r#"        {0} example.txt --search keystring"#, args[0]);
-        // colour_print(&msg, "green");
-
-        // println!("\n  Usages with regex:");
-        // let msg = format!(
-        //     r#"        {0} -- "example\\.txt" --search "keystring""#,
-        //     args[0]
-        // );
-        // colour_print(&msg, "green");
-
-        // println!("\n  Explanation:");
-        // let msg = format!(
-        //     r#" 
-        // + The "example\\.txt" is a regular expression to match
-        // the filename example.txt.
-
-        // + The double backslash (\\) is used to escape the dot (.) 
-        // in the filename.
-
-        // + The "--search keystring" is used to specify the 
-        // regular expression to search for the string keystring 
-        // within the file.
-        //     "#
-        // );
-        // colour_print(&msg, "yellow");
-
-        // println!("  Simple commands:");
-        // let msg = format!(
-        //     r#"
-        // + Find all `.rs` files containing the word `main`:
-        // cargo run -- ".*\.rs$" --search main
-
-        // + Search all files for a particular text
-        // cargo run -- ".*" --search your_text_here
-        // "#
-        // );
-        // colour_print(&msg, "green");
-
-        // println!("  Search all files for a term:");
-        // let msg = format!(
-        //    r#"
-        // + Search all files for a term:
-        // Find all `.rs` files containing the word `main`:
-        
-        // cargo run -- ".*\.rs$" --search "term"
-        // cargo run -- "\.rs"  --search "term"
-        // "#);
-
-        // //        \n\t file_find  \"\\.rs\"  --search \"term\"");
-        // colour_print(&msg, "green");
-
         return;
     }
 
@@ -194,8 +141,6 @@ fn main() {
     // Print search completion message with duration
     let msg = format!("  Search completed in {:.2?}", duration);
     colour_print(&msg, "purple");
-
-    // println!("Search completed in {:.2?}", duration);
 }
 
 // Recursively search files and directories for matches
@@ -215,7 +160,7 @@ fn recurse_files(paths: fs::ReadDir, filename_regex: &Regex, search_regex: Optio
                 // Try to read file contents
                 let contents = fs::read_to_string(&path)
                     .unwrap_or_else(|_| "  Unable to read file contents".to_string());
-                
+
                 // If a search regex is provided, print matching lines
                 if let Some(search) = search_regex {
                     let mut file_printed = false;
@@ -251,19 +196,17 @@ fn bighelp() {
     println!("  It can contain more detailed information about the program.");
     println!("  You can customize it as needed.");
 
-        println!("  Usages without regex:");
-        let msg = format!(r#"         example.txt --search keystring"#);
-        colour_print(&msg, "green");
+    println!("  Usages without regex:");
+    let msg = format!(r#"         example.txt --search keystring"#);
+    colour_print(&msg, "green");
 
-        println!("\n  Usages with regex:");
-        let msg = format!(
-            r#"         -- "example\\.txt" --search "keystring""#,
-        );
-        colour_print(&msg, "green");
+    println!("\n  Usages with regex:");
+    let msg = format!(r#"         -- "example\\.txt" --search "keystring""#,);
+    colour_print(&msg, "green");
 
-        println!("\n  Explanation:");
-        let msg = format!(
-            r#" 
+    println!("\n  Explanation:");
+    let msg = format!(
+        r#" 
         + The "example\\.txt" is a regular expression to match
         the filename example.txt.
 
@@ -274,32 +217,32 @@ fn bighelp() {
         regular expression to search for the string keystring 
         within the file.
             "#
-        );
-        colour_print(&msg, "yellow");
+    );
+    colour_print(&msg, "yellow");
 
-        println!("  Simple commands:");
-        let msg = format!(
-            r#"
+    println!("  Simple commands:");
+    let msg = format!(
+        r#"
         + Find all `.rs` files containing the word `term`:
         cargo run -- ".*\.rs$" --search main
 
         + Search all files for a particular text
         cargo run -- ".*" --search your_text_here
         "#
-        );
-        colour_print(&msg, "green");
+    );
+    colour_print(&msg, "green");
 
-        println!("  Search all files for a term:");
-        let msg = format!(
-           r#"
+    println!("  Search all files for a term:");
+    let msg = format!(
+        r#"
         + Search all files for a term:
         Find all `.rs` files containing the word `main`:
         
         cargo run -- ".*\.rs$" --search "term"
         cargo run -- "\.rs"  --search "term"
-        "#);
+        "#
+    );
 
-        //        \n\t file_find  \"\\.rs\"  --search \"term\"");
-        colour_print(&msg, "green");
-    
+    //        \n\t file_find  \"\\.rs\"  --search \"term\"");
+    colour_print(&msg, "green");
 }
